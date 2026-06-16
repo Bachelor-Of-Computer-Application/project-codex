@@ -46,7 +46,7 @@ void addBalance(int index) {
     printf("Enter amount to add: ");
     scanf("%f", &amount);
     users[index].balance += amount;
-    printf("Balance updated successfully!\n");
+    printf("Balance updated!\n");
 }
 
 void checkBalance(int index) {
