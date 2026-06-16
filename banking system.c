@@ -19,7 +19,7 @@ void signUp() {
     u.balance = 0;
     users[userCount] = u;
     userCount++;
-    printf("Account created successfully!!\n");
+    printf("Account created successfully!\n");
 }
 
 int login() {
