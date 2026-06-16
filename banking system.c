@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
 #define MAX 100
-
 struct User {
     char username[50];
     char password[50];
@@ -21,7 +19,7 @@ void signUp() {
     u.balance = 0;
     users[userCount] = u;
     userCount++;
-    printf("Account created successfully!\n");
+    printf("Account created successfully!!\n");
 }
 
 int login() {
