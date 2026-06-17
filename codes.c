@@ -77,6 +77,39 @@ void userMenu(int index) {
         }
     }
 }
+int main() {
+    int choice;
+    while (1) 
+	{
+        printf("\n===== Simple Banking System =====\n");
+        printf("1. Sign Up\n");
+        printf("2. Login\n");
+        printf("3. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+		 {
+            case 1:
+                signUp();
+                break;
+            case 2: 
+			{
+                int index = login();
+                if (index != -1) 
+				{
+                    userMenu(index);
+                }
+                break;
+            }
+            case 3:
+                printf("Thank you for using the bank system. Goodbye!\n");
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
 
+    return 0;
+}
 
 
