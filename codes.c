@@ -77,6 +77,7 @@ void userMenu(int index) {
         }
     }
 }
+<<<<<<< HEAD
 int main() {
     int choice;
     while (1) 
@@ -113,3 +114,5 @@ int main() {
 }
 
 
+=======
+>>>>>>> fe1a098e9e24cda3d925878f663546653d74fc64
