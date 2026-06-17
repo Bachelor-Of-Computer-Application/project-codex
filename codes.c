@@ -40,4 +40,41 @@ int login() {
     printf("Invalid username or password.\n");
     return -1;
 }
+void addBalance(int index) {
+    float amount;
+    printf("Enter amount to add: ");
+    scanf("%f", &amount);
+    users[index].balance += amount;
+    printf("Balance updated successfully!\n");
+}
+
+void checkBalance(int index) {
+    printf("Your current balance: %.2f\n", users[index].balance);
+}
+
+void userMenu(int index) {
+    int choice;
+    while (1) {
+        printf("\n--- User Menu ---\n");
+        printf("1. Add Balance\n");
+        printf("2. Check Balance\n");
+        printf("3. Logout\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addBalance(index);
+                break;
+            case 2:
+                checkBalance(index);
+                break;
+            case 3:
+                printf("Logging out...\n");
+                return;
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+}
 
