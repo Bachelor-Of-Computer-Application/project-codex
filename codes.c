@@ -77,6 +77,3 @@ void userMenu(int index) {
         }
     }
 }
-
-
-
