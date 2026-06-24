@@ -2,10 +2,13 @@
 #include <string.h>
 #include <stdlib.h>
 #define MAX 100
+#define MAX_TRANS 50
 struct User {
     char username[50];
     char password[50];
     float balance;
+    float history[MAX_TRANS];
+    int transCount;
 };
 
 struct User users[MAX];
@@ -17,7 +20,8 @@ void signUp() {
     scanf("%s", u.username);
     printf("Enter password: ");
     scanf("%s", u.password);
-    u.balance = 0;
+    u.balance = 0; 
+    u.transCount = 0;
     users[userCount] = u;
     userCount++;
     printf("Account created successfully!!\n");
