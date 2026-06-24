@@ -39,6 +39,7 @@ int login() {
         if (strcmp(users[i].username, username) == 0 &&
             strcmp(users[i].password, password) == 0) {
             printf("Login successful!\n");
+            system("clear");
             return i;
         }
     }
@@ -96,6 +97,7 @@ int main() {
 		 {
             case 1:
                 signUp();
+                  system("clear"); 
                 break;
             case 2: 
 			{
