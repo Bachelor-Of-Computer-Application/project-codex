@@ -21,3 +21,48 @@ void clearScreen() {
 void pauseScreen() {
     system("pause");
 }
+void saveData() {
+    FILE *fp = fopen("bankdata.txt", "w");
+
+    if (fp == NULL)
+        return;
+
+    fprintf(fp, "%d\n", userCount);
+
+    for (int i = 0; i < userCount; i++) {
+
+        fprintf(fp, "%s\n", users[i].username);
+        fprintf(fp, "%s\n", users[i].password);
+        fprintf(fp, "%.2f\n", users[i].balance);
+        fprintf(fp, "%d\n", users[i].transCount);
+
+        for (int j = 0; j < users[i].transCount; j++) {
+            fprintf(fp, "%.2f\n", users[i].history[j]);
+        }
+    }
+    printf("Data saved!\n");
+    fclose(fp);
+}
+
+void loadData() {
+    FILE *fp = fopen("bankdata.txt", "r");
+
+    if (fp == NULL)
+        return;
+
+    fscanf(fp, "%d", &userCount);
+
+    for (int i = 0; i < userCount; i++) {
+
+        fscanf(fp, "%s", users[i].username);
+        fscanf(fp, "%s", users[i].password);
+        fscanf(fp, "%f", &users[i].balance);
+        fscanf(fp, "%d", &users[i].transCount);
+
+        for (int j = 0; j < users[i].transCount; j++) {
+            fscanf(fp, "%f", &users[i].history[j]);
+        }
+    }
+
+    fclose(fp);
+}
