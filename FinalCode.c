@@ -169,6 +169,51 @@ void viewHistory(int index) {
     pauseScreen();
     clearScreen();
 }
+void changePassword(int index) {
+    char oldPass[50];
+    char newPass[50];
+    clearScreen();
+    printf("Enter current password: ");
+    scanf("%s", oldPass);
+    if (strcmp(users[index].password, oldPass) != 0) {
+        printf("\nIncorrect password!\n");
+        pauseScreen();
+        clearScreen();
+        return;
+    }
+    printf("Enter new password: ");
+    scanf("%s", newPass);
+    strcpy(users[index].password, newPass);
+    saveData();
+    printf("\nPassword changed successfully!\n");
+    pauseScreen();
+    clearScreen();
+}
+int deleteAccount(int index) {
+    char confirm;
+    clearScreen();
+    printf("Are you sure you want to delete your account? (Y/N): ");
+    scanf(" %c", &confirm);
+    if (confirm != 'Y' &&
+        confirm != 'y') {
+        printf("\nAccount deletion cancelled.\n");
+        pauseScreen();
+        clearScreen();
+        return 0;
+    }
+    for (int i = index;
+         i < userCount - 1;
+         i++) {
+
+        users[i] = users[i + 1];
+    }
+    userCount--;
+    saveData();
+    printf("\nAccount deleted successfully!\n");
+    pauseScreen();
+    clearScreen();
+    return 1;
+}
 void userMenu(int index) {
     int choice;
     while (1) {
