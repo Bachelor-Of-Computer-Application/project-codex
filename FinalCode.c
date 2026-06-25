@@ -118,3 +118,54 @@ int login() {
     clearScreen();
     return -1;
 }
+void addBalance(int index) {
+    float amount;
+    clearScreen();
+    printf("Enter amount to add: ");
+    scanf("%f", &amount);
+    if (amount <= 0) {
+        printf("Invalid amount!\n");
+        pauseScreen();
+        clearScreen();
+        return;
+    }
+    users[index].balance += amount;
+    if (users[index].transCount < MAX_TRANS) {
+        users[index].history[
+            users[index].transCount
+        ] = amount;
+        users[index].transCount++;
+        saveData();
+    }
+    printf("\nBalance updated successfully!\n");
+    printf("Current Balance: %.2f\n",
+           users[index].balance);
+    pauseScreen();
+    clearScreen();
+}
+void checkBalance(int index) {
+    clearScreen();
+    printf("\n===== ACCOUNT BALANCE =====\n");
+    printf("Current Balance: %.2f\n",
+           users[index].balance);
+    pauseScreen();
+    clearScreen();
+}
+void viewHistory(int index) {
+    clearScreen();
+    printf("\n===== TRANSACTION HISTORY =====\n");
+    if (users[index].transCount == 0) {
+        printf("No transactions available.\n");
+    }
+    else {
+        for (int i = 0;
+             i < users[index].transCount;
+             i++) {
+            printf("%d. Added %.2f\n",
+                   i + 1,
+                   users[index].history[i]);
+        }
+    }
+    pauseScreen();
+    clearScreen();
+}
