@@ -169,3 +169,80 @@ void viewHistory(int index) {
     pauseScreen();
     clearScreen();
 }
+void userMenu(int index) {
+    int choice;
+    while (1) {
+        clearScreen();
+        printf("===== USER MENU =====\n");
+        printf("1. Add Balance\n");
+        printf("2. Check Balance\n");
+        printf("3. View History\n");
+        printf("4. Change Password\n");
+        printf("5. Delete Account\n");
+        printf("6. Logout\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                addBalance(index);
+                break;
+            case 2:
+                checkBalance(index);
+                break;
+            case 3:
+                viewHistory(index);
+                break;
+            case 4:
+                changePassword(index);
+                break;
+            case 5:
+                if (deleteAccount(index)) {
+                    return;
+                }
+                break;
+            case 6:
+                printf("\nLogging out...\n");
+                pauseScreen();
+                clearScreen();
+                return;
+            default:
+                printf("\nInvalid choice!\n");
+                pauseScreen();
+                clearScreen();
+        }
+    }
+}
+int main() {
+	    loadData();
+    int choice;
+    while (1) {
+        clearScreen();
+        printf("===== SIMPLE BANKING SYSTEM =====\n");
+        printf("1. Sign Up\n");
+        printf("2. Login\n");
+        printf("3. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                signUp();
+                break;
+            case 2: {
+                int index = login();
+                if (index != -1) {
+                    userMenu(index);
+                }
+                break;
+            }
+            case 3:
+                clearScreen();
+                printf("Thank you for using the banking system.\n");
+                printf("Goodbye!\n");
+                return 0;
+            default:
+                printf("\nInvalid choice!\n");
+                pauseScreen();
+        }
+    }
+    return 0;
+}
