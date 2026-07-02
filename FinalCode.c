@@ -22,6 +22,7 @@ void pauseScreen() {
     system("pause");
 }
 void saveData() {
+	int i,j;
     FILE *fp = fopen("bankdata.txt", "w");
 
     if (fp == NULL)
@@ -29,14 +30,14 @@ void saveData() {
 
     fprintf(fp, "%d\n", userCount);
 
-    for (int i = 0; i < userCount; i++) {
+    for ( i = 0; i < userCount; i++) {
 
         fprintf(fp, "%s\n", users[i].username);
         fprintf(fp, "%s\n", users[i].password);
         fprintf(fp, "%.2f\n", users[i].balance);
         fprintf(fp, "%d\n", users[i].transCount);
 
-        for (int j = 0; j < users[i].transCount; j++) {
+        for ( j = 0; j < users[i].transCount; j++) {
             fprintf(fp, "%.2f\n", users[i].history[j]);
         }
     }
@@ -45,6 +46,7 @@ void saveData() {
 }
 
 void loadData() {
+	int i,j;
     FILE *fp = fopen("bankdata.txt", "r");
 
     if (fp == NULL)
@@ -52,14 +54,14 @@ void loadData() {
 
     fscanf(fp, "%d", &userCount);
 
-    for (int i = 0; i < userCount; i++) {
+    for ( i = 0; i < userCount; i++) {
 
         fscanf(fp, "%s", users[i].username);
         fscanf(fp, "%s", users[i].password);
         fscanf(fp, "%f", &users[i].balance);
         fscanf(fp, "%d", &users[i].transCount);
 
-        for (int j = 0; j < users[i].transCount; j++) {
+        for ( j = 0; j < users[i].transCount; j++) {
             fscanf(fp, "%f", &users[i].history[j]);
         }
     }
@@ -67,6 +69,7 @@ void loadData() {
     fclose(fp);
 }
 void signUp() {
+	int i;
     clearScreen();
     if (userCount >= MAX) {
         printf("User limit reached!\n");
@@ -77,7 +80,7 @@ void signUp() {
     struct User u;
     printf("Enter username: ");
     scanf("%s", u.username);
-    for (int i = 0; i < userCount; i++) {
+    for ( i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, u.username) == 0) {
             printf("\nUsername already exists!\n");
             pauseScreen();
@@ -97,6 +100,7 @@ void signUp() {
     clearScreen();
 }
 int login() {
+	int i;
     clearScreen();
     char username[50];
     char password[50];
@@ -104,7 +108,7 @@ int login() {
     scanf("%s", username);
     printf("Enter password: ");
     scanf("%s", password);
-    for (int i = 0; i < userCount; i++) {
+    for (i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, username) == 0 &&
             strcmp(users[i].password, password) == 0) {
             printf("\nLogin successful!\n");
@@ -152,15 +156,14 @@ void checkBalance(int index) {
     clearScreen();
 }
 void viewHistory(int index) {
+	int i;
     clearScreen();
     printf("\n===== TRANSACTION HISTORY =====\n");
     if (users[index].transCount == 0) {
         printf("No transactions available.\n");
     }
     else {
-        for (int i = 0;
-             i < users[index].transCount;
-             i++) {
+        for (i = 0;i < users[index].transCount; i++) {
             printf("%d. Added %.2f\n",
                    i + 1,
                    users[index].history[i]);
@@ -190,6 +193,7 @@ void changePassword(int index) {
     clearScreen();
 }
 int deleteAccount(int index) {
+	int i;
     char confirm;
     clearScreen();
     printf("Are you sure you want to delete your account? (Y/N): ");
@@ -201,9 +205,7 @@ int deleteAccount(int index) {
         clearScreen();
         return 0;
     }
-    for (int i = index;
-         i < userCount - 1;
-         i++) {
+    for ( i = index;i < userCount - 1;i++) {
 
         users[i] = users[i + 1];
     }
