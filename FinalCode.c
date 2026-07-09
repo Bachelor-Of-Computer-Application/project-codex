@@ -4,6 +4,7 @@
 #define MAX 100
 #define MAX_TRANS 50
 #define CLEAR "cls"
+#define P "\t\t\t\t\t\t"
 struct User {
     char username[50];
     char password[50];
@@ -41,7 +42,7 @@ void saveData() {
             fprintf(fp, "%.2f\n", users[i].history[j]);
         }
     }
-    printf("Data saved!\n");
+    printf(P"Data saved!\n");
     fclose(fp);
 }
 
@@ -72,30 +73,30 @@ void signUp() {
 	int i;
     clearScreen();
     if (userCount >= MAX) {
-        printf("User limit reached!\n");
+        printf(P"User limit reached!\n");
         pauseScreen();
         clearScreen();
         return;
     }
     struct User u;
-    printf("Enter username: ");
+    printf(P"Enter username: ");
     scanf("%s", u.username);
     for ( i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, u.username) == 0) {
-            printf("\nUsername already exists!\n");
+            printf(P"\nUsername already exists!\n");
             pauseScreen();
             clearScreen();
             return;
         }
     }
-    printf("Enter password: ");
+    printf(P"Enter password: ");
     scanf("%s", u.password);
     u.balance = 0;
     u.transCount = 0;
     users[userCount] = u;
     userCount++;
     saveData();
-    printf("\nAccount created successfully!\n");
+    printf(P"\nAccount created successfully!\n");
     pauseScreen();
     clearScreen();
 }
@@ -104,20 +105,20 @@ int login() {
     clearScreen();
     char username[50];
     char password[50];
-    printf("Enter username: ");
+    printf(P"Enter username: ");
     scanf("%s", username);
-    printf("Enter password: ");
+    printf(P"Enter password: ");
     scanf("%s", password);
     for (i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, username) == 0 &&
             strcmp(users[i].password, password) == 0) {
-            printf("\nLogin successful!\n");
+            printf(P"\nLogin successful!\n");
             pauseScreen();
             clearScreen();
             return i;
         }
     }
-    printf("\nInvalid username or password!\n");
+    printf(P"\nInvalid username or password!\n");
     pauseScreen();
     clearScreen();
     return -1;
@@ -125,10 +126,10 @@ int login() {
 void addBalance(int index) {
     float amount;
     clearScreen();
-    printf("Enter amount to add: ");
+    printf(P"Enter amount to add: ");
     scanf("%f", &amount);
     if (amount <= 0) {
-        printf("Invalid amount!\n");
+        printf(P"Invalid amount!\n");
         pauseScreen();
         clearScreen();
         return;
@@ -141,16 +142,16 @@ void addBalance(int index) {
         users[index].transCount++;
         saveData();
     }
-    printf("\nBalance updated successfully!\n");
-    printf("Current Balance: %.2f\n",
+    printf(P"\nBalance updated successfully!\n");
+    printf(P"Current Balance: %.2f\n",
            users[index].balance);
     pauseScreen();
     clearScreen();
 }
 void checkBalance(int index) {
     clearScreen();
-    printf("\n===== ACCOUNT BALANCE =====\n");
-    printf("Current Balance: %.2f\n",
+    printf(P"\n===== ACCOUNT BALANCE =====\n");
+    printf(P"Current Balance: %.2f\n",
            users[index].balance);
     pauseScreen();
     clearScreen();
@@ -158,13 +159,13 @@ void checkBalance(int index) {
 void viewHistory(int index) {
 	int i;
     clearScreen();
-    printf("\n===== TRANSACTION HISTORY =====\n");
+    printf(P"\n===== TRANSACTION HISTORY =====\n");
     if (users[index].transCount == 0) {
-        printf("No transactions available.\n");
+        printf(P"No transactions available.\n");
     }
     else {
         for (i = 0;i < users[index].transCount; i++) {
-            printf("%d. Added %.2f\n",
+            printf(P"%d. Added %.2f\n",
                    i + 1,
                    users[index].history[i]);
         }
@@ -176,19 +177,19 @@ void changePassword(int index) {
     char oldPass[50];
     char newPass[50];
     clearScreen();
-    printf("Enter current password: ");
+    printf(P"Enter current password: ");
     scanf("%s", oldPass);
     if (strcmp(users[index].password, oldPass) != 0) {
-        printf("\nIncorrect password!\n");
+        printf(P"\nIncorrect password!\n");
         pauseScreen();
         clearScreen();
         return;
     }
-    printf("Enter new password: ");
+    printf(P"Enter new password: ");
     scanf("%s", newPass);
     strcpy(users[index].password, newPass);
     saveData();
-    printf("\nPassword changed successfully!\n");
+    printf(P"\nPassword changed successfully!\n");
     pauseScreen();
     clearScreen();
 }
@@ -196,11 +197,11 @@ int deleteAccount(int index) {
 	int i;
     char confirm;
     clearScreen();
-    printf("Are you sure you want to delete your account? (Y/N): ");
+    printf(P"Are you sure you want to delete your account? (Y/N): ");
     scanf(" %c", &confirm);
     if (confirm != 'Y' &&
         confirm != 'y') {
-        printf("\nAccount deletion cancelled.\n");
+        printf(P"\nAccount deletion cancelled.\n");
         pauseScreen();
         clearScreen();
         return 0;
@@ -211,7 +212,7 @@ int deleteAccount(int index) {
     }
     userCount--;
     saveData();
-    printf("\nAccount deleted successfully!\n");
+    printf(P"\nAccount deleted successfully!\n");
     pauseScreen();
     clearScreen();
     return 1;
@@ -220,15 +221,15 @@ void userMenu(int index) {
     int choice;
     while (1) {
         clearScreen();
-        printf("===== USER MENU =====\n");
-        printf("1. Add Balance\n");
-        printf("2. Check Balance\n");
-        printf("3. View History\n");
-        printf("4. Change Password\n");
-        printf("5. Delete Account\n");
-        printf("6. Logout\n");
-        printf("Enter choice: ");
-        scanf("%d", &choice);
+        printf(P"===== USER MENU =====\n");
+        printf(P"1. Add Balance\n");
+        printf(P"2. Check Balance\n");
+        printf(P"3. View History\n");
+        printf(P"4. Change Password\n");
+        printf(P"5. Delete Account\n");
+        printf(P"6. Logout\n");
+        printf(P"Enter choice: ");
+        scanf(P"%d", &choice);
         switch (choice) {
             case 1:
                 addBalance(index);
@@ -248,12 +249,12 @@ void userMenu(int index) {
                 }
                 break;
             case 6:
-                printf("\nLogging out...\n");
+                printf(P"\nLogging out...\n");
                 pauseScreen();
                 clearScreen();
                 return;
             default:
-                printf("\nInvalid choice!\n");
+                printf(P"\nInvalid choice!\n");
                 pauseScreen();
                 clearScreen();
         }
@@ -264,11 +265,11 @@ int main() {
     int choice;
     while (1) {
         clearScreen();
-        printf("===== SIMPLE BANKING SYSTEM =====\n");
-        printf("1. Sign Up\n");
-        printf("2. Login\n");
-        printf("3. Exit\n");
-        printf("Enter choice: ");
+        printf(P"===== SIMPLE BANKING SYSTEM =====\n");
+        printf(P"1. Sign Up\n");
+        printf(P"2. Login\n");
+        printf(P"3. Exit\n");
+        printf(P"Enter choice: ");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
@@ -283,11 +284,11 @@ int main() {
             }
             case 3:
                 clearScreen();
-                printf("Thank you for using the banking system.\n");
-                printf("Goodbye!\n");
+                printf(P"Thank you for using the banking system.\n");
+                printf(P"Goodbye!\n");
                 return 0;
             default:
-                printf("\nInvalid choice!\n");
+                printf(P"\nInvalid choice!\n");
                 pauseScreen();
         }
     }
