@@ -77,7 +77,7 @@ void signUp() {
 	int i;
     clearScreen();
     if (userCount >= MAX) {
-        printf(P"User limit reached!\n");
+        printf("\n"P"User limit reached!\n");
         pauseScreen();
         clearScreen();
         return;
@@ -100,7 +100,7 @@ void signUp() {
     users[userCount] = u;
     userCount++;
     saveData();
-    printf("\n"P"\nAccount created successfully!\n");
+    printf("\n"P"Account created successfully!\n");
     pauseScreen();
     clearScreen();
 }
@@ -122,7 +122,7 @@ int login() {
             return i;
         }
     }
-    printf(P"\nInvalid username or password!\n");
+    printf("\n"P"Invalid username or password!\n");
     pauseScreen();
     clearScreen();
     return -1;
@@ -163,7 +163,7 @@ void checkBalance(int index) {
 void viewHistory(int index) {
 	int i;
     clearScreen();
-    printf(P"\n===== TRANSACTION HISTORY =====\n");
+    printf("\n"P"===== TRANSACTION HISTORY =====\n");
     if (users[index].transCount == 0) {
         printf(P"No transactions available.\n");
     }
@@ -184,7 +184,7 @@ void changePassword(int index) {
     printf(P"Enter current password: ");
     scanf("%s", oldPass);
     if (strcmp(users[index].password, oldPass) != 0) {
-        printf(P"\nIncorrect password!\n");
+        printf("\n"P"Incorrect password!\n");
         pauseScreen();
         clearScreen();
         return;
@@ -205,7 +205,7 @@ int deleteAccount(int index) {
     scanf(" %c", &confirm);
     if (confirm != 'Y' &&
         confirm != 'y') {
-        printf(P"\nAccount deletion cancelled.\n");
+        printf("\n"P"Account deletion cancelled.\n");
         pauseScreen();
         clearScreen();
         return 0;
@@ -216,7 +216,7 @@ int deleteAccount(int index) {
     }
     userCount--;
     saveData();
-    printf(P"\nAccount deleted successfully!\n");
+    printf("\n"P"Account deleted successfully!\n");
     pauseScreen();
     clearScreen();
     return 1;
@@ -253,12 +253,12 @@ void userMenu(int index) {
                 }
                 break;
             case 6:
-                printf(P"\nLogging out...\n");
+                printf("\n"P"Logging out...\n");
                 pauseScreen();
                 clearScreen();
                 return;
             default:
-                printf(P"\nInvalid choice!\n");
+                printf("\n"P"Invalid choice!\n");
                 pauseScreen();
                 clearScreen();
         }
@@ -292,7 +292,7 @@ int main() {
                 printf(P"Goodbye!\n");
                 return 0;
             default:
-                printf(P"\nInvalid choice!\n");
+                printf("\n"P"Invalid choice!\n");
                 pauseScreen();
         }
     }
