@@ -193,7 +193,7 @@ void changePassword(int index) {
     scanf("%s", newPass);
     strcpy(users[index].password, newPass);
     saveData();
-    printf(P"\nPassword changed successfully!\n");
+    printf("\n"P"Password changed successfully!\n");
     pauseScreen();
     clearScreen();
 }
