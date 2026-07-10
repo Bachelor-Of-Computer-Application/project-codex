@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <conio.h>
 #include <string.h>
 #include <stdlib.h>
 #define MAX 100
@@ -20,7 +21,10 @@ void clearScreen() {
     system(CLEAR);
 }
 void pauseScreen() {
-    system("pause");
+    printf(P"Press any key to continue . . . ");
+    fflush(stdout);
+    getch();        
+    printf("\n");
 }
 void saveData() {
 	int i,j;
@@ -83,7 +87,7 @@ void signUp() {
     scanf("%s", u.username);
     for ( i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, u.username) == 0) {
-            printf(P"\nUsername already exists!\n");
+            printf("\n"P"Username already exists!\n");
             pauseScreen();
             clearScreen();
             return;
@@ -96,7 +100,7 @@ void signUp() {
     users[userCount] = u;
     userCount++;
     saveData();
-    printf(P"\nAccount created successfully!\n");
+    printf("\n"P"\nAccount created successfully!\n");
     pauseScreen();
     clearScreen();
 }
@@ -112,7 +116,7 @@ int login() {
     for (i = 0; i < userCount; i++) {
         if (strcmp(users[i].username, username) == 0 &&
             strcmp(users[i].password, password) == 0) {
-            printf(P"\nLogin successful!\n");
+           printf("\n"P"Login successful!\n");
             pauseScreen();
             clearScreen();
             return i;
@@ -142,7 +146,7 @@ void addBalance(int index) {
         users[index].transCount++;
         saveData();
     }
-    printf(P"\nBalance updated successfully!\n");
+    printf("\n"P"Balance updated successfully!\n");
     printf(P"Current Balance: %.2f\n",
            users[index].balance);
     pauseScreen();
@@ -150,7 +154,7 @@ void addBalance(int index) {
 }
 void checkBalance(int index) {
     clearScreen();
-    printf(P"\n===== ACCOUNT BALANCE =====\n");
+    printf("\n"P"===== ACCOUNT BALANCE =====\n");
     printf(P"Current Balance: %.2f\n",
            users[index].balance);
     pauseScreen();
